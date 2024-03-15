@@ -10,3 +10,6 @@ const obj2 = {
 
 obj2.a();
 obj2.b();
+
+// yandex
+// arrow undefined
