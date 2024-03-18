@@ -179,7 +179,21 @@ const obj = {
 obj.methodWithArrowFunc(); // undefined
 */
 
+/*
 // 10
+// const obj = {
+//   x: "react",
+//   handleClick: function () {
+//     console.log(this.x);
+//   },
+// };
+
+// function higherOrderFunction(callback) {
+//   callback();
+// }
+
+// higherOrderFunction(obj.handleClick); // undefined
+
 const obj = {
   x: "react",
   handleClick: function () {
@@ -188,7 +202,224 @@ const obj = {
 };
 
 function higherOrderFunction(callback) {
-  callback();
+  callback.bind(obj)();
 }
 
-higherOrderFunction(obj.handleClick);
+higherOrderFunction(obj.handleClick); // react
+*/
+
+/*
+// 11
+const obj1 = {
+  x: "angular",
+  method1: function () {
+    console.log(this.x);
+  },
+};
+
+obj1.method1(); // angular
+
+const obj2 = {
+  x: "vue",
+  method2: function () {
+    obj1.method1();
+  },
+};
+
+obj2.method2(); // angular
+*/
+
+/*
+// 12
+function makeWorker() {
+  let name = "Pete";
+
+  return function () {
+    console.log(name);
+  };
+}
+
+let name = "John";
+
+let work = makeWorker();
+
+work(); // Pete
+*/
+
+/*
+// 13
+function generateIncrementor() {
+  let count = 0;
+
+  return function () {
+    count++;
+    console.log(count);
+  };
+}
+
+const incrementor = generateIncrementor();
+incrementor(); // 1
+incrementor(); // 2
+*/
+
+/*
+// 14
+function outer() {
+  let message = "Hello";
+
+  function inner() {
+    console.log(message);
+  }
+
+  return inner;
+}
+
+const innerFunc = outer();
+innerFunc(); // Hello
+*/
+
+/*
+// 15
+function delayedPrint() {
+  let message = "Delayed message";
+
+  setTimeout(function () {
+    console.log(message);
+  }, 1000);
+}
+
+delayedPrint(); // Delayed message
+*/
+
+/*
+// 16
+function manipulateData() {
+  let data = [];
+
+  return {
+    add: function (item) {
+      data.push(item);
+    },
+    print: function () {
+      console.log(data);
+    },
+  };
+}
+
+const dataHandler = manipulateData();
+dataHandler.add(1);
+dataHandler.add(2);
+dataHandler.print(); // [1,2]
+*/
+
+/*
+// 17
+function makeCounter() {
+  let count = 0;
+
+  return function () {
+    return count++;
+  };
+}
+
+let counter = makeCounter();
+let counter2 = makeCounter();
+
+alert(counter()); // 0
+alert(counter()); // 1
+
+alert(counter2()); // 0
+alert(counter2()); // 1
+*/
+
+/*
+// 18
+function Counter() {
+  let count = 0;
+
+  this.up = function () {
+    return ++count;
+  };
+  this.down = function () {
+    return --count;
+  };
+}
+
+let counter = new Counter();
+
+console.log(counter.up()); // 1
+console.log(counter.up()); // 2
+console.log(counter.down()); // 1
+*/
+
+/*
+// 19
+let phrase = "Hello";
+
+if (true) {
+  let user = "John";
+
+  function sayHi() {
+    alert(`${phrase}, ${user}`);
+  }
+}
+
+sayHi();
+*/
+
+/*
+// 20
+function sum(a) {
+  return function (b) {
+    return a + b; // берёт "a" из внешнего лексического окружения
+  };
+}
+
+console.log(sum(1)(2));
+console.log(sum(5)(-1));
+*/
+
+/*
+// 21
+let x = 1;
+
+function func() {
+  console.log(x); // Ref error
+
+  let x = 2;
+}
+
+func();
+
+// let x = 1;
+
+// function func() {
+//   console.log(x); // 1
+
+// }
+
+// func();
+*/
+
+/*
+// 22
+function inBetween(start, end) {
+  return function (n) {
+    return n >= start && n <= end;
+  };
+}
+
+function inArray(arr1) {
+  return function (n) {
+    return arr1.includes(n);
+  };
+}
+
+let arr = [1, 2, 3, 4, 5, 6, 7];
+
+console.log(arr.filter(inBetween(3, 6))); // 3,4,5,6
+
+console.log(arr.filter(inArray([1, 2, 10]))); // 1,2
+*/
+
+// 23
