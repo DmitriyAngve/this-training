@@ -542,6 +542,7 @@ f.call(f); // 5
 obj.m.call(f); // 5
 */
 
+/*
 // 29
 var x = 10;
 var obj = {
@@ -554,3 +555,318 @@ var obj = {
 // console.log(retrieveX()); // 10
 var retrieveX = obj.getX.bind(obj);
 console.log(retrieveX()); // 20
+*/
+
+/*
+// 30
+var person = {
+  firstName: "Jane",
+  lastName: "Smith",
+  fullName: function () {
+    return this.firstName + " " + this.lastName;
+  },
+};
+
+var anotherPerson = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+console.log(person.fullName.call(anotherPerson)); // John Doe
+*/
+
+/*
+// 31
+function foo() {
+  console.log(this.bar);
+}
+
+var bar = "global";
+var obj1 = { bar: "obj1", foo: foo };
+var obj2 = { bar: "obj2" };
+
+foo(); // global
+obj1.foo(); // obj1
+foo.call(obj2); // obj2
+*/
+
+/*
+// 32
+var x = 10;
+var obj = {
+  x: 20,
+  getX: function() {
+    return this.x;
+  }
+};
+var retrieveX = obj.getX.bind(obj);
+console.log(retrieveX());
+*/
+
+/*
+// 33
+var bar = "outer";
+function foo() {
+  var bar = "inner";
+  console.log(this.bar);
+}
+var obj = { bar: "object" };
+obj.foo = foo;
+foo(); // outer
+obj.foo(); // object
+foo.call(obj); // object
+*/
+
+/*
+// 34
+var bar = "global";
+function foo() {
+  console.log(this.bar);
+}
+var obj = { bar: "object" };
+var fn = foo.bind(obj);
+fn(); // object
+*/
+
+/*
+// 35
+var bar = "global";
+var obj = {
+  bar: "object",
+  foo: function () {
+    console.log(this.bar);
+  },
+};
+var fn1 = obj.foo;
+var fn2 = obj.foo.bind(obj);
+fn1(); // global
+fn2(); // object
+*/
+
+/*
+// 36
+var bar = "outer";
+var obj = {
+  bar: "object",
+  foo: function () {
+    console.log(this.bar);
+  },
+};
+var fn = obj.foo.bind(window);
+fn(); // outer
+*/
+
+/*
+// 37
+var bar = "global";
+var obj = {
+  bar: "object",
+  foo: function () {
+    console.log(this.bar);
+  },
+};
+var fn = obj.foo.bind(null);
+fn(); // global
+*/
+
+/*
+// 38
+var bar = "global";
+function foo() {
+  console.log(this.bar);
+}
+var obj1 = { bar: "object1", foo: foo };
+var obj2 = { bar: "object2" };
+var bindedFoo = foo.bind(obj2);
+bindedFoo(); // object2
+obj1.foo(); // object1
+*/
+
+/*
+// 39
+var bar = "outer";
+var obj = {
+  bar: "inner",
+  foo: function () {
+    console.log(this.bar);
+  },
+};
+var foo = obj.foo.bind(obj);
+foo(); // inner
+*/
+
+/*
+// 40
+var bar = "global";
+function foo() {
+  console.log(this.bar);
+}
+var obj1 = { bar: "object1" };
+var obj2 = { bar: "object2" };
+var boundFoo1 = foo.bind(obj1);
+var boundFoo2 = boundFoo1.bind(obj2);
+boundFoo2(); // object1
+*/
+
+/*
+// 41
+var bar = "global";
+var obj = {
+  bar: "object1",
+  foo: function () {
+    console.log(this.bar);
+  },
+};
+var bindedFoo = obj.foo.bind({ bar: "object2" });
+bindedFoo(); // object2
+*/
+
+/*
+// 42
+var bar = "global";
+function foo() {
+  console.log(this.bar);
+}
+var obj = {
+  bar: "object",
+  foo: foo.bind({ bar: "bound" }),
+};
+var unboundFoo = obj.foo;
+unboundFoo(); // bound
+*/
+
+/*
+// 43
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.sayName = function () {
+  console.log(this.name);
+};
+
+var person1 = new Person("Alice");
+var person2 = new Person("Bob");
+
+person1.sayName(); // Alice
+person2.sayName(); // Bob
+*/
+
+/*
+// 44
+var obj = {
+  prop: "value",
+  method: function () {
+    console.log(this.prop);
+  },
+};
+
+var method = obj.method;
+method(); // undefined
+*/
+
+/*
+// 45
+var obj = {
+  prop: "value",
+  method: function () {
+    console.log(this.prop);
+  },
+};
+
+var obj2 = { prop: "anotherValue" };
+
+obj.method.call(obj2); // anotherValue
+*/
+
+/*
+// 46
+var obj = {
+  prop: "value",
+  method: function () {
+    console.log(this.prop);
+  },
+};
+
+var obj2 = { prop: "anotherValue" };
+var method = obj.method.bind(obj2);
+method(); // anotherValue
+*/
+
+/*
+// 47
+var obj = {
+  prop: "value",
+  method: function () {
+    console.log(this.prop);
+  },
+};
+
+var obj2 = { prop: "anotherValue" };
+var method = obj.method.bind(obj2);
+obj.method(); // value
+method(); // anotherValue
+*/
+
+/*
+// 48
+var obj = {
+  prop: "value",
+  method: function () {
+    console.log(this.prop);
+  },
+};
+
+var obj2 = { prop: "anotherValue" };
+var method = obj.method.bind(obj2);
+var obj3 = { prop: "thirdValue", method: method };
+obj3.method(); // thirdValue
+*/
+
+/*
+// 49
+var obj = {
+  prop: "value",
+  method: function () {
+    console.log(this.prop);
+  },
+};
+
+var method = obj.method;
+method(); // undefined
+
+var obj1 = {
+  prop1: "value",
+  method1: function () {
+    console.log(this.prop1);
+  },
+};
+
+obj1.method1(); // value
+*/
+
+/*
+// 50
+var obj = {
+  prop: "value",
+  method: function () {
+    console.log(this.prop);
+  },
+};
+
+var method = obj.method.bind(null);
+method(); // undefined
+*/
+
+// 51
+var prop = "value";
+var obj = {
+  prop: "anotherValue",
+  method: function () {
+    console.log(this.prop);
+  },
+};
+
+obj.method(); // anotherValue
+var method = obj.method.bind(null);
+method(); // value
